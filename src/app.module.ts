@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { BluetoothEquipmentScanningModule } from './bluetooth-equipment-scanning/bluetooth-equipment-scanning.module';
 
 @Module({
-  imports: [BluetoothEquipmentScanningModule],
+  imports: [],
   controllers: [AppController],
   providers: [AppService],
 })
