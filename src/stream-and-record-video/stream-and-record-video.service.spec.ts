@@ -9,7 +9,9 @@ describe('StreamAndRecordVideoService', () => {
       providers: [StreamAndRecordVideoService],
     }).compile();
 
-    service = module.get<StreamAndRecordVideoService>(StreamAndRecordVideoService);
+    service = module.get<StreamAndRecordVideoService>(
+      StreamAndRecordVideoService,
+    );
   });
 
   it('should be defined', () => {
