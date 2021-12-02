@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { BluetoothEquipmentScanningModule } from './bluetooth-equipment-scanning/bluetooth-equipment-scanning.module';
 import { StreamAndRecordVideoModule } from './stream-and-record-video/stream-and-record-video.module';
 import { EntitiesMap } from './entities/entities';
+import { FaceRecognitionModule } from './face-recognition/face-recognition.module';
 @Module({
   imports: [
     StreamAndRecordVideoModule,
@@ -22,6 +23,7 @@ import { EntitiesMap } from './entities/entities';
       entities: [...EntitiesMap],
       logging: true,
     }),
+    FaceRecognitionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
