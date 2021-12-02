@@ -7,6 +7,7 @@ import { BluetoothEquipmentScanningModule } from './bluetooth-equipment-scanning
 import { StreamAndRecordVideoModule } from './stream-and-record-video/stream-and-record-video.module';
 import { EntitiesMap } from './entities/entities';
 import { FaceRecognitionModule } from './face-recognition/face-recognition.module';
+import { LockerModule } from './locker/locker.module';
 @Module({
   imports: [
     StreamAndRecordVideoModule,
@@ -24,6 +25,7 @@ import { FaceRecognitionModule } from './face-recognition/face-recognition.modul
       logging: true,
     }),
     FaceRecognitionModule,
+    LockerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

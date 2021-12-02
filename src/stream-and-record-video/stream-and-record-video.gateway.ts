@@ -2,6 +2,7 @@ import { StreamAndRecordVideoService } from './stream-and-record-video.service';
 import { Injectable, Logger } from '@nestjs/common';
 import * as io from 'socket.io-client';
 import { Socket } from 'socket.io-client';
+import { LockerGateway } from 'src/locker/locker.gateway';
 
 @Injectable()
 export class StreamAndRecordVideoGateway {
@@ -10,6 +11,7 @@ export class StreamAndRecordVideoGateway {
   private liveIntervalHandler: Record<number, NodeJS.Timeout> = {};
   constructor(
     private readonly streamAndRecordVideoService: StreamAndRecordVideoService,
+    private readonly lockerGateway: LockerGateway,
   ) {
     this.socket = io(
       `${process.env.SOCKET_IO_HOST}:${process.env.SOCKET_IO_PORT}/${process.env.SOCKET_IO_NAME_SPACE}`,
@@ -38,6 +40,7 @@ export class StreamAndRecordVideoGateway {
   subscribeToEvents(socket: Socket): void {
     socket.on(`start_live`, this.onStartLive.bind(this));
     socket.on(`stop_live`, this.onStopLive.bind(this));
+    socket.on(`locker_update`, this.onLockerUpdate.bind(this));
   }
 
   onStartLive(data: { camera: number }): void {
@@ -65,5 +68,10 @@ export class StreamAndRecordVideoGateway {
       picture: picture,
     };
     this.socket.emit(`live`, emitData);
+  }
+
+  onLockerUpdate(data: { uid: string; name: string }): void {
+    console.log('data: ', data);
+    this.lockerGateway.server.emit('locker_update', data);
   }
 }
